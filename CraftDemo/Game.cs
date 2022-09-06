@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using static CraftDemo.Utility;
+using static System.Console;
 
 namespace CraftDemo
 {
@@ -10,25 +11,45 @@ namespace CraftDemo
         Player player = new Player("Anonymous Person");
 
         public void Start()
-        { float amount = 12.45678687687f;
-            Console.Title = "My awesome app!";
-            //concatenation
-            Print("Welcome to my Craft app " + player.Name + "!");
-            //composite formatting
-            Console.WriteLine("Welcome to my Craft app {0}!", player.Name);
-            //Interpolation 
-            Print($"Welcome to my Craft app {player.Name}!");
-            Print($"{amount}");
-            Print($"{amount.ToString("c")}");
+        { 
+            Title = "Welcome to Craft-O-Rama!";
+            Print($"Welcome {player.Name}!");
+            Pause();
+            Menu();
+        }
 
-            player.Inventory.Add(
-                new Item() {
-                    Name = "Map", 
-                    Description = "A unique old map that looks important." 
-                }
-                );
+        private void Menu()
+        {
+            Clear();
+            Print($"Player: {player.Name}, Currency: {player.Currency.ToString("c")}");
+            string[] options = {"Change Name", "See Inventory" };
+           
+            Print("Please choose an option:");
+            for (int i=0; i<options.Length;i++)
+            {
+                Print($"{i+1}) {options[i]}");
+            }
+            string input = ReadLine();
 
-            Console.ReadKey();
+            switch(input)
+            {
+                case "1":
+                    player.ChangeName();
+                    Pause();
+                    break;
+                case "2":
+                    Console.Clear();
+                    Print($"Current inventory of {player.Name}: \n");
+                    Print(player.ShowInventoryItems());
+                    Pause();
+                    break;
+                default:
+                    Print("Please enter only one of the options listed.");
+                    Pause();
+                    
+                    break;
+            }
+            Menu();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using static System.Console;
 
 namespace CraftDemo
 {
@@ -11,6 +12,11 @@ namespace CraftDemo
         {
             Console.WriteLine(message);
             
+        }
+    public static void Pause()
+        {
+            Print("Enter any key to continue...");
+            ReadKey();
         }
     }
 }
