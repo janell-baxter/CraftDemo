@@ -22,7 +22,7 @@ namespace CraftDemo
         {
             Clear();
             Print($"Player: {player.Name}, Currency: {player.Currency.ToString("c")}");
-            string[] options = {"Change Name", "See Inventory" };
+            string[] options = {"Change Name", "See Inventory", "Instructions", "Credits", "Load Inventory" };
            
             Print("Please choose an option:");
             for (int i=0; i<options.Length;i++)
@@ -40,6 +40,21 @@ namespace CraftDemo
                 case "2":
                     Console.Clear();
                     Print($"Current inventory of {player.Name}: \n");
+                    Print(player.ShowInventoryItems());
+                    Pause();
+                    break;
+                case "3":
+                    //show instructions
+                    Print(TextFromExternalFile("../../../data/instructions.txt"));
+                    Pause();
+                    break;
+                case "4":
+                    //credits
+                    Print(TextFromExternalFile("../../../data/credits.txt"));
+                    Pause();
+                    break;
+                case "5":
+                    player.Inventory = ItemsInstantiatedFromExternalFile("../../../data/inventory.txt");
                     Print(player.ShowInventoryItems());
                     Pause();
                     break;
